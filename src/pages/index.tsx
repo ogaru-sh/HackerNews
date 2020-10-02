@@ -1,8 +1,8 @@
-import React, {FC} from 'react' 
-import Page from '../components/page'
+import React, { FC } from "react";
+import Page from "../components/page";
 
 const Index: FC = () => {
-  return <Page />
-}
+	return <Page />;
+};
 
-export default Index
+export default Index;
