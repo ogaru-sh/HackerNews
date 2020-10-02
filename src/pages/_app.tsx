@@ -2,19 +2,33 @@ import { Provider } from "react-redux";
 import { useStore } from "../store";
 import { AppProps } from "next/app";
 import { createGlobalStyle } from "styled-components";
+import React, { useEffect } from "react";
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    background: #cccccc3d;
-  }
-`;
+import { ThemeProvider as StyledComponentsThemeProvider } from "styled-components";
+import { ThemeProvider as MaterialUIThemeProvider, StylesProvider } from "@material-ui/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+
+import theme from "../styles/theme";
 
 const App = ({ Component, pageProps }: AppProps) => {
+	useEffect(() => {
+		const jssStyles = document.querySelector("#jss-server-side");
+		if (jssStyles && jssStyles.parentNode) {
+			jssStyles.parentNode.removeChild(jssStyles);
+		}
+	}, []);
 	const store = useStore(pageProps.initialReduxState);
+
 	return (
 		<Provider store={store}>
-			<GlobalStyle />
-			<Component {...pageProps} />
+			<StylesProvider injectFirst>
+				<MaterialUIThemeProvider theme={theme}>
+					<StyledComponentsThemeProvider theme={theme}>
+						<CssBaseline />
+						<Component {...pageProps} />
+					</StyledComponentsThemeProvider>
+				</MaterialUIThemeProvider>
+			</StylesProvider>
 		</Provider>
 	);
 };

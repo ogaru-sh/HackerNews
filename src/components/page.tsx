@@ -1,9 +1,9 @@
 import { useDispatch } from "react-redux";
 import useInterval from "../lib/useInterval";
+import ButtonUi from "./Sample";
 import Header from "./Header";
-import Threads from "./Threads";
 
-export default function Page() {
+const Page = () => {
 	const dispatch = useDispatch();
 
 	// Tick the time every second
@@ -18,7 +18,8 @@ export default function Page() {
 	return (
 		<>
 			<Header />
-      <Threads />
 		</>
 	);
-}
+};
+
+export default Page;
