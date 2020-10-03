@@ -1,11 +1,13 @@
 import { Provider } from "react-redux";
-import { useStore } from "../store";
+import { useStore } from "../ts/store";
 import { AppProps } from "next/app";
-import { createGlobalStyle } from "styled-components";
 import React, { useEffect } from "react";
 
 import { ThemeProvider as StyledComponentsThemeProvider } from "styled-components";
-import { ThemeProvider as MaterialUIThemeProvider, StylesProvider } from "@material-ui/styles";
+import {
+	ThemeProvider as MaterialUIThemeProvider,
+	StylesProvider,
+} from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 import theme from "../styles/theme";
