@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-export default function AlignItemsList() {
+export default function ThreadList() {
 	const classes = useStyles();
 
 	return (
