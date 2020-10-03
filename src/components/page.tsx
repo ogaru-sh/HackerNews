@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import useInterval from "../lib/useInterval";
 import Header from "./header/Header";
-import TitlebarGridList from "./GridList";
+import AlignItemsList from "./List";
 
 const Page = () => {
 	const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const Page = () => {
 	return (
 		<>
 			<Header />
-			<TitlebarGridList />
+			<AlignItemsList />
 		</>
 	);
 };
