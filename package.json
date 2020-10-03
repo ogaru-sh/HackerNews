@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start"
   },
   "dependencies": {
@@ -20,6 +20,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@firebase/app-types": "^0.6.1",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/styles": "^4.10.0",
@@ -29,6 +30,7 @@
     "@types/react-redux": "^7.1.9",
     "@types/redux-thunk": "^2.1.0",
     "@types/styled-components": "^5.1.3",
+    "firebase": "^7.22.0",
     "redux-devtools": "^3.7.0",
     "typescript": "^4.0.3"
   }

@@ -56,6 +56,9 @@ export default class CustomDocument extends NextDocument {
 					<Main />
 					<NextScript />
 				</body>
+				<script src="/__/firebase/7.22.0/firebase-app.js"></script>
+				<script src="/__/firebase/7.22.0/firebase-analytics.js"></script>
+				<script src="/__/firebase/init.js"></script>
 			</Html>
 		);
 	}
