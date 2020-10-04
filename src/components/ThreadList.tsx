@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { useSelector } from "react-redux";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -6,8 +6,12 @@ import ListItem from "@material-ui/core/ListItem";
 import Divider from "@material-ui/core/Divider";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
+import { createMuiTheme } from "@material-ui/core/styles";
 import { AppState } from "../ts/state";
 
 import moment from "moment";
@@ -22,6 +26,9 @@ const useStyles = makeStyles((theme: Theme) =>
 		inline: {
 			display: "inline",
 		},
+		title: {
+			color: theme.palette.primary.light,
+		},
 	})
 );
 
@@ -29,7 +36,6 @@ const ThreadList = () => {
 	const classes = useStyles();
 	const props = useSelector((state: AppState) => state);
 	console.log(props);
-
 	return (
 		<List className={classes.root}>
 			{(() => {
@@ -51,12 +57,43 @@ const ThreadList = () => {
 	);
 };
 
+//お気に入りボタンの切り替える色の定義
+const favoriteIconTheme = createMuiTheme({
+	palette: {
+		primary: {
+			main: "#4791db",
+		},
+		secondary: {
+			main: "#e33371",
+		},
+	},
+});
+
 const HackerNewsList: any = (props: any) => {
 	const { item, classes } = props;
-	
+	const [favoriteIcon, setFavoriteIcon] = React.useState({
+		color: "primary",
+		checked: false,
+	});
+
 	//投稿してからの時間を算出
 	const postTime = moment(Number(item.time) * 1000).fromNow();
 	const commentUrl = `https://news.ycombinator.com/item?id=${item.id}`;
+	const handleChange = () => {
+		const state = favoriteIcon;
+		if (state.checked === false) {
+			setFavoriteIcon({
+				color: "secondary",
+				checked: true,
+			});
+		} else {
+			setFavoriteIcon({
+				color: "primary",
+				checked: false,
+			});
+		}
+	};
+
 	return (
 		<ListItem
 			button
@@ -88,6 +125,14 @@ const HackerNewsList: any = (props: any) => {
 					</React.Fragment>
 				}
 			/>
+			<ListItemSecondaryAction>
+				<IconButton onClick={handleChange}>
+					<StarBorderIcon
+						fontSize="large"
+						color={favoriteIcon.color}
+					/>
+				</IconButton>
+			</ListItemSecondaryAction>
 		</ListItem>
 	);
 };
