@@ -20,7 +20,6 @@ const App = ({ Component, pageProps }: AppProps) => {
 		}
 	}, []);
 	const store = useStore(pageProps.initialReduxState);
-
 	return (
 		<Provider store={store}>
 			<StylesProvider injectFirst>

@@ -1,7 +1,7 @@
 import { Action, Dispatch } from "redux";
 import fetchAPI from "./api/fetchAPI";
 
-interface InitialAction extends Action {
+export interface InitialAction extends Action {
 	type: ActionTypes.INIT_HACKERNEWS;
 	payload: {
 		result: object[];
@@ -20,7 +20,7 @@ export enum ActionTypes {
 	ERROR = "ERROR",
 }
 
-export type Actions = InitialAction & Error;
+export type Actions = InitialAction | Error;
 
 //actionCreator
 const init = () => {
@@ -30,9 +30,15 @@ const init = () => {
 			dispatch({
 				type: ActionTypes.INIT_HACKERNEWS,
 				payload: {
-					result: data,
+					result: {
+						test: "test",
+					},
 				},
 			});
 		});
 	};
+};
+
+export default {
+	init,
 };

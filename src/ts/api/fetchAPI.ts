@@ -7,4 +7,4 @@ const fetchAPI: any = async () => {
 	return await fetch(apiUrl).then((resp) => resp.json());
 };
 
-export default fetchAPI;
+export default { fetchAPI };

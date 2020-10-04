@@ -1,5 +1,5 @@
-import Page from "../components/page";
-import { initializeStore } from "../store";
+import Page from "../components/Page";
+import { initializeStore } from "../ts/store";
 
 export default function SSR() {
 	return <Page />;
