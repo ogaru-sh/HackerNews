@@ -55,7 +55,7 @@ const search = (inputValue: string) => (
 	console.log(state);
 	const searchItem = state.searchResult.reduce(
 		(array: object[], val: { title: string }) => {
-			const title = val.title;
+			const title = val.title.toLowerCase();
 			if (title.indexOf(inputValue) !== -1) {
 				array.push(val);
 			}
@@ -63,6 +63,7 @@ const search = (inputValue: string) => (
 		},
 		[]
 	);
+	//TODO: search用アクションを作成
 	dispatch({
 		type: ActionTypes.INIT_HACKERNEWS,
 		payload: {
