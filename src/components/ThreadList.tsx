@@ -56,6 +56,7 @@ const HackerNewsList: any = (props: any) => {
 
 	//投稿してからの時間を算出
 	const postTime = moment(Number(item.time) * 1000).fromNow();
+	const commentUrl = `https://news.ycombinator.com/item?id=${item.id}`;
 	return (
 		<ListItem
 			button
@@ -79,8 +80,11 @@ const HackerNewsList: any = (props: any) => {
 						>
 							by {item.by}
 						</Typography>
-						{` ${item.score} points `}
-						{`| ${postTime}`}
+						{item.score} points | {postTime} |
+						<a href={commentUrl} target="_brank">
+							{item.descendants}
+							comments
+						</a>
 					</React.Fragment>
 				}
 			/>
