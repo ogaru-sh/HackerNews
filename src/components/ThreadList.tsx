@@ -11,7 +11,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
-import { createMuiTheme } from "@material-ui/core/styles";
+import styled from "styled-components";
 import { AppState } from "../ts/state";
 import actions from "../ts/action";
 import moment from "moment";
@@ -19,8 +19,6 @@ import moment from "moment";
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
-			width: "100%",
-			paddingTop: "10px",
 			backgroundColor: theme.palette.background.paper,
 		},
 		inline: {
@@ -32,11 +30,16 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
+const StyledList = styled(List)`
+	width: 100%;
+	padding-top: 10px;
+`;
+
 const ThreadList = () => {
 	const classes = useStyles();
 	const props = useSelector((state: AppState) => state);
 	return (
-		<List className={classes.root}>
+		<StyledList className={classes.root}>
 			{(() => {
 				return props.result.map((item: any, index: number) => {
 					return (
@@ -52,7 +55,7 @@ const ThreadList = () => {
 					);
 				});
 			})()}
-		</List>
+		</StyledList>
 	);
 };
 

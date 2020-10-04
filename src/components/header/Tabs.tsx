@@ -1,21 +1,18 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch } from "react-redux";
+import styled from "styled-components";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import actions from "../../ts/action";
 import config from "../../ts/config";
 
-const useStyles = makeStyles({
-	root: {
-		flexGrow: 1,
-		borderRadius: "0px",
-	},
-});
+const StyledPaper = styled(Paper)`
+	flex-grow: 1;
+	border-radius: 0px;
+`;
 
 const CenteredTabs = () => {
-	const classes = useStyles();
 	const dispatch = useDispatch();
 	const [value, setValue] = React.useState(0);
 
@@ -25,7 +22,7 @@ const CenteredTabs = () => {
 	};
 
 	return (
-		<Paper className={classes.root}>
+		<StyledPaper>
 			<Tabs
 				value={value}
 				onChange={handleChange}
@@ -38,7 +35,7 @@ const CenteredTabs = () => {
 				<Tab label="job" />
 				<Tab label="favorite" />
 			</Tabs>
-		</Paper>
+		</StyledPaper>
 	);
 };
 
