@@ -1,9 +1,9 @@
 import fetch from "node-fetch";
+import config from "../config";
 
-const apiUrl =
-	"https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty";
-
-const fetchAPI: any = async () => {
+const fetchAPI: any = async (jsonName: string) => {
+	const apiInfo = config.apiInfo;
+	const apiUrl = `${apiInfo.baseUrl}/${jsonName}.json?${apiInfo.query}`;
 	return await fetch(apiUrl).then((resp) => resp.json());
 };
 

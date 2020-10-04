@@ -3,3 +3,10 @@ export interface InitialProps {
 		dispatch: any;
 	};
 }
+
+export interface Config {
+	apiInfo: {
+		baseUrl: string;
+		query: string;
+	};
+}

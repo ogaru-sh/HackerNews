@@ -1,5 +1,6 @@
 import { Action, Dispatch } from "redux";
 import fetchAPI from "./api/fetchAPI";
+import config from "./config";
 
 export interface InitialAction extends Action {
 	type: ActionTypes.INIT_HACKERNEWS;
@@ -25,7 +26,7 @@ export type Actions = InitialAction | Error;
 //actionCreator
 const init = () => {
 	return async (dispatch: Dispatch<ActionTypes>) => {
-		await fetchAPI.fetchAPI().then((data: any) => {
+		await fetchAPI.fetchAPI("newstories").then((data: any) => {
 			console.log(data);
 			dispatch({
 				type: ActionTypes.INIT_HACKERNEWS,
