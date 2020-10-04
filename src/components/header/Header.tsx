@@ -76,7 +76,7 @@ export default function SearchAppBar() {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 
-	const handleChange = (event: React.ChangeEvent<{}>) => {
+	const handleChange = (event: { target: { value: string } }) => {
 		dispatch(actions.search(event.target.value));
 	};
 	return (
