@@ -1,5 +1,5 @@
-import React, { FC, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { FC, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -13,7 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { AppState } from "../ts/state";
-
+import actions from "../ts/action";
 import moment from "moment";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -35,18 +35,17 @@ const useStyles = makeStyles((theme: Theme) =>
 const ThreadList = () => {
 	const classes = useStyles();
 	const props = useSelector((state: AppState) => state);
-	console.log(props);
 	return (
 		<List className={classes.root}>
 			{(() => {
 				return props.result.map((item: any, index: number) => {
-					console.log(item);
 					return (
 						<>
 							<HackerNewsList
 								key={index}
 								item={item}
 								classes={classes}
+								favoriteList={props.favoriteList}
 							/>
 							<Divider variant="inset" component="li" />
 						</>
@@ -57,41 +56,42 @@ const ThreadList = () => {
 	);
 };
 
-//お気に入りボタンの切り替える色の定義
-const favoriteIconTheme = createMuiTheme({
-	palette: {
-		primary: {
-			main: "#4791db",
-		},
-		secondary: {
-			main: "#e33371",
-		},
-	},
-});
-
 const HackerNewsList: any = (props: any) => {
-	const { item, classes } = props;
-	const [favoriteIcon, setFavoriteIcon] = React.useState({
-		color: "primary",
+	const dispatch = useDispatch();
+	const { item, classes, favoriteList } = props;
+	const isFavorite = favoriteList.indexOf(item.id) !== -1 ? true : false;
+
+	const [favoriteState, setFavoriteState] = useState({
+		color: "",
 		checked: false,
+		id: "",
 	});
+
+	favoriteState.color = isFavorite ? "secondary" : "primary";
+	favoriteState.checked = isFavorite;
+	favoriteState.id = item.id;
 
 	//投稿してからの時間を算出
 	const postTime = moment(Number(item.time) * 1000).fromNow();
 	const commentUrl = `https://news.ycombinator.com/item?id=${item.id}`;
+
+	//お気に入りボタンのクリック状態を変更、お気に入りリスト変更
 	const handleChange = () => {
-		const state = favoriteIcon;
+		const state = favoriteState;
 		if (state.checked === false) {
-			setFavoriteIcon({
+			setFavoriteState({
 				color: "secondary",
 				checked: true,
+				id: item.id,
 			});
 		} else {
-			setFavoriteIcon({
+			setFavoriteState({
 				color: "primary",
 				checked: false,
+				id: item.id,
 			});
 		}
+		dispatch(actions.favorite(favoriteState.checked, favoriteState.id));
 	};
 
 	return (
@@ -117,7 +117,7 @@ const HackerNewsList: any = (props: any) => {
 						>
 							by {item.by}
 						</Typography>
-						{item.score} points | {postTime} |
+						{item.score} points | {postTime}
 						<a href={commentUrl} target="_brank">
 							{item.descendants}
 							comments
@@ -129,7 +129,7 @@ const HackerNewsList: any = (props: any) => {
 				<IconButton onClick={handleChange}>
 					<StarBorderIcon
 						fontSize="large"
-						color={favoriteIcon.color}
+						color={favoriteState.color}
 					/>
 				</IconButton>
 			</ListItemSecondaryAction>
