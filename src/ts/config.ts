@@ -10,11 +10,7 @@ const config: Config = {
 		popular: "topstories",
 		job: "jobstories",
 	},
-	tabTitles: [
-		"new",
-		"popular",
-		"job"
-	]
+	tabTitles: ["new", "popular", "job"],
 	viewLimit: 10,
 };
 
