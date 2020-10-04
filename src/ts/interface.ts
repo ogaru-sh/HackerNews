@@ -9,4 +9,5 @@ export interface Config {
 		baseUrl: string;
 		query: string;
 	};
+	viewLimit: number;
 }

@@ -26,16 +26,21 @@ export type Actions = InitialAction | Error;
 //actionCreator
 const init = () => {
 	return async (dispatch: Dispatch<ActionTypes>) => {
-		await fetchAPI.fetchAPI("newstories").then((data: any) => {
-			console.log(data);
-			dispatch({
-				type: ActionTypes.INIT_HACKERNEWS,
-				payload: {
-					result: {
-						test: "test",
-					},
+		const newItems = await fetchAPI.fetchAPI("newstories");
+		console.log("newItems", newItems);
+		const limitItems = newItems.slice(0, config.viewLimit);
+		const itemDetailArr = [];
+		for (const item of limitItems) {
+			const itemDetail = await fetchAPI.fetchAPI(`item/${item}`);
+			itemDetailArr.push(itemDetail);
+		}
+		dispatch({
+			type: ActionTypes.INIT_HACKERNEWS,
+			payload: {
+				result: {
+					test: "test",
 				},
-			});
+			},
 		});
 	};
 };
