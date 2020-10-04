@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -11,9 +11,9 @@ import {
 	Theme,
 	makeStyles,
 } from "@material-ui/core/styles";
-import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import CenteredTabs from "./Tabs";
+import actions from "../../ts/action";
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -74,7 +74,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function SearchAppBar() {
 	const classes = useStyles();
+	const dispatch = useDispatch();
 
+	const handleChange = (event: React.ChangeEvent<{}>) => {
+		dispatch(actions.search(event.target.value));
+	};
 	return (
 		<div className={classes.root}>
 			<AppBar position="static">
@@ -93,6 +97,7 @@ export default function SearchAppBar() {
 								input: classes.inputInput,
 							}}
 							inputProps={{ "aria-label": "search" }}
+							onChange={handleChange}
 						/>
 					</div>
 				</Toolbar>

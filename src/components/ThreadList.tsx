@@ -53,7 +53,7 @@ const ThreadList = () => {
 
 const HackerNewsList: any = (props: any) => {
 	const { item, classes } = props;
-
+	
 	//投稿してからの時間を算出
 	const postTime = moment(Number(item.time) * 1000).fromNow();
 	const commentUrl = `https://news.ycombinator.com/item?id=${item.id}`;
