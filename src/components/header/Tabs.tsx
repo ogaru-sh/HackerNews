@@ -1,8 +1,11 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import actions from "../../ts/action";
+import config from "../../ts/config";
 
 const useStyles = makeStyles({
 	root: {
@@ -11,12 +14,14 @@ const useStyles = makeStyles({
 	},
 });
 
-export default function CenteredTabs() {
+const CenteredTabs = () => {
 	const classes = useStyles();
+	const dispatch = useDispatch();
 	const [value, setValue] = React.useState(0);
 
 	const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
 		setValue(newValue);
+		dispatch(actions.init(config.tabTitles[newValue]));
 	};
 
 	return (
@@ -28,10 +33,12 @@ export default function CenteredTabs() {
 				textColor="primary"
 				centered
 			>
-				<Tab label="New" />
-				<Tab label="Profile" />
-				<Tab label="What New" />
+				<Tab label="new" />
+				<Tab label="popular" />
+				<Tab label="job" />
 			</Tabs>
 		</Paper>
 	);
-}
+};
+
+export default CenteredTabs;

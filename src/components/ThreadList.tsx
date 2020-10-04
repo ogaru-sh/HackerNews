@@ -33,7 +33,7 @@ const ThreadList = () => {
 	return (
 		<List className={classes.root}>
 			{(() => {
-				return props.newStories.map((item: any, index: number) => {
+				return props.result.map((item: any, index: number) => {
 					console.log(item);
 					return (
 						<>

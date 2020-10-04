@@ -9,5 +9,11 @@ export interface Config {
 		baseUrl: string;
 		query: string;
 	};
+	apiType: {
+		new: string;
+		popular: string;
+		job: string;
+	};
+	tabTitles: string[];
 	viewLimit: number;
 }

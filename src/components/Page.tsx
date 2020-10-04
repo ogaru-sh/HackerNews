@@ -8,7 +8,7 @@ const Page = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		const init = async () => {
-			await new Promise(() => dispatch(actions.init()));
+			await new Promise(() => dispatch(actions.init("new")));
 		};
 		init();
 	}, []);

@@ -24,9 +24,9 @@ export enum ActionTypes {
 export type Actions = InitialAction | Error;
 
 //actionCreator
-const init = () => {
+const init = (apiType: string) => {
 	return async (dispatch: Dispatch<ActionTypes>) => {
-		const newItems = await fetchAPI.fetchAPI("newstories");
+		const newItems = await fetchAPI.fetchAPI(config.apiType[apiType]);
 		console.log("newItems", newItems);
 		const limitItems = newItems.slice(0, config.viewLimit);
 		const itemDetailArr = [];

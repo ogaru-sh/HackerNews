@@ -16,7 +16,7 @@ export const reducer = (state = initialState, action: Actions) => {
 	switch (action.type) {
 		case ActionTypes.INIT_HACKERNEWS:
 			return Object.assign({}, state, {
-				newStories: action.payload.result,
+				result: action.payload.result,
 			});
 		case ActionTypes.ERROR:
 			return Object.assign({}, state, {
