@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -7,6 +8,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
+import { AppState } from "../ts/state";
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -21,14 +23,19 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-export default function ThreadList() {
+const ThreadList = () => {
 	const classes = useStyles();
+	const props = useSelector((state: AppState) => state);
+	console.log(props);
 
 	return (
 		<List className={classes.root}>
 			<ListItem alignItems="flex-start">
 				<ListItemAvatar>
-					<Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+					<Avatar
+						alt="Remy Sharp"
+						src="/static/images/avatar/1.jpg"
+					/>
 				</ListItemAvatar>
 				<ListItemText
 					primary="Brunch this weekend?"
@@ -42,7 +49,9 @@ export default function ThreadList() {
 							>
 								Ali Connors
 							</Typography>
-							{" — I'll be in your neighborhood doing errands this…"}
+							{
+								" — I'll be in your neighborhood doing errands this…"
+							}
 						</React.Fragment>
 					}
 				/>
@@ -50,7 +59,10 @@ export default function ThreadList() {
 			<Divider variant="inset" component="li" />
 			<ListItem alignItems="flex-start">
 				<ListItemAvatar>
-					<Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+					<Avatar
+						alt="Travis Howard"
+						src="/static/images/avatar/2.jpg"
+					/>
 				</ListItemAvatar>
 				<ListItemText
 					primary="Summer BBQ"
@@ -72,7 +84,10 @@ export default function ThreadList() {
 			<Divider variant="inset" component="li" />
 			<ListItem alignItems="flex-start">
 				<ListItemAvatar>
-					<Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+					<Avatar
+						alt="Cindy Baker"
+						src="/static/images/avatar/3.jpg"
+					/>
 				</ListItemAvatar>
 				<ListItemText
 					primary="Oui Oui"
@@ -86,11 +101,15 @@ export default function ThreadList() {
 							>
 								Sandra Adams
 							</Typography>
-							{" — Do you have Paris recommendations? Have you ever…"}
+							{
+								" — Do you have Paris recommendations? Have you ever…"
+							}
 						</React.Fragment>
 					}
 				/>
 			</ListItem>
 		</List>
 	);
-}
+};
+
+export default ThreadList;

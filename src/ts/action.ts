@@ -37,9 +37,7 @@ const init = () => {
 		dispatch({
 			type: ActionTypes.INIT_HACKERNEWS,
 			payload: {
-				result: {
-					test: "test",
-				},
+				result: itemDetailArr,
 			},
 		});
 	};

@@ -2,11 +2,13 @@ import { Actions, ActionTypes } from "./action";
 
 export interface DefaultState {
 	result: any;
+	newStories: any;
 	error: any;
 }
 
 export const initialState: DefaultState = {
-	result: {},
+	result: [],
+	newStories: [],
 	error: {},
 };
 
@@ -14,7 +16,7 @@ export const reducer = (state = initialState, action: Actions) => {
 	switch (action.type) {
 		case ActionTypes.INIT_HACKERNEWS:
 			return Object.assign({}, state, {
-				result: action.payload.result,
+				newStories: action.payload.result,
 			});
 		case ActionTypes.ERROR:
 			return Object.assign({}, state, {
