@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -9,6 +9,8 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import { AppState } from "../ts/state";
+
+import moment from "moment";
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -30,85 +32,59 @@ const ThreadList = () => {
 
 	return (
 		<List className={classes.root}>
-			<ListItem alignItems="flex-start">
-				<ListItemAvatar>
-					<Avatar
-						alt="Remy Sharp"
-						src="/static/images/avatar/1.jpg"
-					/>
-				</ListItemAvatar>
-				<ListItemText
-					primary="Brunch this weekend?"
-					secondary={
-						<React.Fragment>
-							<Typography
-								component="span"
-								variant="body2"
-								className={classes.inline}
-								color="textPrimary"
-							>
-								Ali Connors
-							</Typography>
-							{
-								" — I'll be in your neighborhood doing errands this…"
-							}
-						</React.Fragment>
-					}
-				/>
-			</ListItem>
-			<Divider variant="inset" component="li" />
-			<ListItem alignItems="flex-start">
-				<ListItemAvatar>
-					<Avatar
-						alt="Travis Howard"
-						src="/static/images/avatar/2.jpg"
-					/>
-				</ListItemAvatar>
-				<ListItemText
-					primary="Summer BBQ"
-					secondary={
-						<React.Fragment>
-							<Typography
-								component="span"
-								variant="body2"
-								className={classes.inline}
-								color="textPrimary"
-							>
-								to Scott, Alex, Jennifer
-							</Typography>
-							{" — Wish I could come, but I'm out of town this…"}
-						</React.Fragment>
-					}
-				/>
-			</ListItem>
-			<Divider variant="inset" component="li" />
-			<ListItem alignItems="flex-start">
-				<ListItemAvatar>
-					<Avatar
-						alt="Cindy Baker"
-						src="/static/images/avatar/3.jpg"
-					/>
-				</ListItemAvatar>
-				<ListItemText
-					primary="Oui Oui"
-					secondary={
-						<React.Fragment>
-							<Typography
-								component="span"
-								variant="body2"
-								className={classes.inline}
-								color="textPrimary"
-							>
-								Sandra Adams
-							</Typography>
-							{
-								" — Do you have Paris recommendations? Have you ever…"
-							}
-						</React.Fragment>
-					}
-				/>
-			</ListItem>
+			{(() => {
+				return props.newStories.map((item: any, index: number) => {
+					console.log(item);
+					return (
+						<>
+							<HackerNewsList
+								key={index}
+								item={item}
+								classes={classes}
+							/>
+							<Divider variant="inset" component="li" />
+						</>
+					);
+				});
+			})()}
 		</List>
+	);
+};
+
+const HackerNewsList: any = (props: any) => {
+	const { item, classes } = props;
+
+	//投稿してからの時間を算出
+	const postTime = moment(Number(item.time) * 1000).fromNow();
+	return (
+		<ListItem
+			button
+			alignItems="flex-start"
+			component="a"
+			href={item.url}
+			target="_brank"
+		>
+			<ListItemAvatar>
+				<Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+			</ListItemAvatar>
+			<ListItemText
+				primary={item.title}
+				secondary={
+					<React.Fragment>
+						<Typography
+							component="span"
+							variant="body2"
+							className={classes.inline}
+							color="textPrimary"
+						>
+							by {item.by}
+						</Typography>
+						{` ${item.score} points `}
+						{`| ${postTime}`}
+					</React.Fragment>
+				}
+			/>
+		</ListItem>
 	);
 };
 

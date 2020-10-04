@@ -87,7 +87,7 @@ export default function SearchAppBar() {
 							<SearchIcon />
 						</div>
 						<InputBase
-							placeholder="スレッドを検索…"
+							placeholder="Search…"
 							classes={{
 								root: classes.inputRoot,
 								input: classes.inputInput,
