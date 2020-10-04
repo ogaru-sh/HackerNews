@@ -15,6 +15,9 @@ export interface ActionBase extends Action {
 
 interface ClickFavoriteButton extends Action {
 	type: ActionTypes.CLICK_FAVORITE_BUTTON;
+	payload: {
+		favoriteList: [];
+	};
 }
 
 interface Error extends Action {
@@ -30,24 +33,29 @@ export enum ActionTypes {
 	ERROR = "ERROR",
 }
 
-export type Actions = ActionBase & (ClickFavoriteButton | Error);
+export type Actions = ActionBase | ClickFavoriteButton | Error;
 
 //actionCreator
 const init = (apiType: string) => {
 	return async (dispatch: Dispatch<ActionTypes>, getState: any) => {
-		const newItems = await fetchAPI.fetchAPI(config.apiType[apiType]);
-		const limitItems = newItems.slice(0, config.viewLimit);
+		let fetchItems;
+		const favoriteList = getState().favoriteList;
+		if (apiType === "favorite") {
+			fetchItems = favoriteList;
+		} else {
+			fetchItems = await fetchAPI.fetchAPI(config.apiType[apiType]);
+		}
+		const limitItems = fetchItems.slice(0, config.viewLimit);
 		const itemDetailArr = [];
 		for (const item of limitItems) {
 			const itemDetail = await fetchAPI.fetchAPI(`item/${item}`);
 			itemDetailArr.push(itemDetail);
 		}
-		const favoriteList = getState().favoriteList;
 		dispatch({
 			type: ActionTypes.INIT_HACKERNEWS,
 			payload: {
 				result: itemDetailArr,
-				pureResult: newItems,
+				pureResult: fetchItems,
 				searchResult: itemDetailArr,
 				tabName: apiType,
 				favoriteList: favoriteList,
@@ -62,7 +70,6 @@ const search = (inputValue: string) => (
 	getState: any
 ) => {
 	const state = getState();
-	console.log(state);
 	const searchItem = state.searchResult.reduce(
 		(array: object[], val: { title: string }) => {
 			const title = val.title.toLowerCase();
@@ -73,6 +80,7 @@ const search = (inputValue: string) => (
 		},
 		[]
 	);
+
 	//TODO: search用アクションを作成
 	dispatch({
 		type: ActionTypes.INIT_HACKERNEWS,
@@ -80,6 +88,7 @@ const search = (inputValue: string) => (
 			result: searchItem,
 			searchResult: state.searchResult,
 			pureResult: state.pureResult,
+			favoriteList: state.favoriteList,
 		},
 	});
 };
@@ -89,7 +98,6 @@ const favorite = (checked: boolean, id: string) => (
 	dispatch: Dispatch<ActionTypes>,
 	getState: any
 ) => {
-	console.log(checked, id);
 	const state = getState();
 	let favoriteList = state.favoriteList;
 	if (!checked) {
@@ -99,7 +107,6 @@ const favorite = (checked: boolean, id: string) => (
 			return val !== id;
 		});
 	}
-	console.log(favoriteList);
 	dispatch({
 		type: ActionTypes.CLICK_FAVORITE_BUTTON,
 		payload: {

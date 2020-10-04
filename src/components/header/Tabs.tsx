@@ -36,6 +36,7 @@ const CenteredTabs = () => {
 				<Tab label="new" />
 				<Tab label="popular" />
 				<Tab label="job" />
+				<Tab label="favorite" />
 			</Tabs>
 		</Paper>
 	);

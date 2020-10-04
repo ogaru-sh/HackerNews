@@ -56,17 +56,26 @@ const ThreadList = () => {
 	);
 };
 
+interface IfavoriteState {
+	color: any;
+	checked: boolean;
+	id: string;
+}
+
 const HackerNewsList: any = (props: any) => {
 	const dispatch = useDispatch();
 	const { item, classes, favoriteList } = props;
 	const isFavorite = favoriteList.indexOf(item.id) !== -1 ? true : false;
 
-	const [favoriteState, setFavoriteState] = useState({
+	const [favoriteState, setFavoriteState] = useState<IfavoriteState>({
 		color: "",
 		checked: false,
 		id: "",
 	});
-
+	enum role {
+		PRIMARY = "primary",
+		SECONDARY = "secondary",
+	}
 	favoriteState.color = isFavorite ? "secondary" : "primary";
 	favoriteState.checked = isFavorite;
 	favoriteState.id = item.id;
