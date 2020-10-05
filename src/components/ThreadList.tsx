@@ -1,45 +1,40 @@
 import React, { FC, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
+import List, { ListProps } from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Divider from "@material-ui/core/Divider";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
+import Typography, { TypographyProps } from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
+import Link from "@material-ui/core/Link";
 import styled from "styled-components";
 import { AppState } from "../ts/state";
 import actions from "../ts/action";
 import moment from "moment";
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		root: {
-			backgroundColor: theme.palette.background.paper,
-		},
-		inline: {
-			display: "inline",
-		},
-		title: {
-			color: theme.palette.primary.light,
-		},
-	})
-);
-
 const StyledList = styled(List)`
 	width: 100%;
 	padding-top: 10px;
+` as React.ComponentType<ListProps>;
+
+//TODO: 型をつける
+const StyledTypography: any = styled(Typography)`
+	padding-left: 10px;
+`;
+
+const StyledAuthTypography: any = styled(Typography)`
+	display: inline;
 `;
 
 const ThreadList = () => {
-	const classes = useStyles();
 	const props = useSelector((state: AppState) => state);
 	return (
-		<StyledList className={classes.root}>
+		<StyledList>
 			{(() => {
 				return props.result.map((item: any, index: number) => {
 					return (
@@ -47,7 +42,6 @@ const ThreadList = () => {
 							<HackerNewsList
 								key={index}
 								item={item}
-								classes={classes}
 								favoriteList={props.favoriteList}
 							/>
 							<Divider variant="inset" component="li" />
@@ -67,7 +61,7 @@ interface IfavoriteState {
 
 const HackerNewsList: any = (props: any) => {
 	const dispatch = useDispatch();
-	const { item, classes, favoriteList } = props;
+	const { item, favoriteList } = props;
 	const isFavorite = favoriteList.indexOf(item.id) !== -1 ? true : false;
 
 	const [favoriteState, setFavoriteState] = useState<IfavoriteState>({
@@ -75,10 +69,7 @@ const HackerNewsList: any = (props: any) => {
 		checked: false,
 		id: "",
 	});
-	enum role {
-		PRIMARY = "primary",
-		SECONDARY = "secondary",
-	}
+
 	favoriteState.color = isFavorite ? "secondary" : "primary";
 	favoriteState.checked = isFavorite;
 	favoriteState.id = item.id;
@@ -121,19 +112,22 @@ const HackerNewsList: any = (props: any) => {
 				primary={item.title}
 				secondary={
 					<React.Fragment>
-						<Typography
+						<StyledAuthTypography
 							component="span"
-							variant="body2"
-							className={classes.inline}
 							color="textPrimary"
 						>
 							by {item.by}
-						</Typography>
-						{item.score} points | {postTime}
-						<a href={commentUrl} target="_brank">
-							{item.descendants}
-							comments
-						</a>
+						</StyledAuthTypography>
+						<StyledTypography>
+							{item.score} points | {postTime}
+							<Link
+								href={commentUrl}
+								color="inherit"
+								target="_brank"
+							>
+								{` | ${item.descendants} comments`}
+							</Link>
+						</StyledTypography>
 					</React.Fragment>
 				}
 			/>
