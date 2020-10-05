@@ -1,8 +1,12 @@
 import React, { FC } from "react";
-import Page from "../components/Page";
+import dynamic from "next/dynamic";
+
+const PageNoSSR = dynamic(() => import("../components/Page"), {
+	ssr: false,
+});
 
 const Index: FC = () => {
-	return <Page />;
+	return <PageNoSSR />;
 };
 
 export default Index;
