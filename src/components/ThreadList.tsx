@@ -11,7 +11,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography, { TypographyProps } from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
-import Link from "@material-ui/core/Link";
+import Button from "@material-ui/core/Button";
 import styled from "styled-components";
 import { AppState } from "../ts/state";
 import actions from "../ts/action";
@@ -119,15 +119,16 @@ const HackerNewsList: any = (props: any) => {
 							>
 								by {item.by}
 							</StyledAuthTypography>
-							<StyledTypography>
+							<StyledTypography component="span">
 								{item.score} points | {postTime}
-								<Link
-									href={commentUrl}
+								<button
+									onClick={(commentUrl) => {
+										window.open().location.href = commentUrl;
+									}}
 									color="inherit"
-									target="_brank"
 								>
-									{` | ${item.descendants} comments`}
-								</Link>
+									{`${item.descendants} comments`}
+								</button>
 							</StyledTypography>
 						</React.Fragment>
 					}
