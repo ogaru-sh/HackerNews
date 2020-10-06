@@ -15,7 +15,8 @@ const StyledPaper = styled(Paper)`
 const CenteredTabs = () => {
 	const dispatch = useDispatch();
 	const [value, setValue] = React.useState(0);
-
+	
+	//　タブの切り替えとタブ名に沿ったデータを取得するアクション実行
 	const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
 		setValue(newValue);
 		dispatch(actions.init(config.tabTitles[newValue]));
