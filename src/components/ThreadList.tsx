@@ -31,7 +31,7 @@ const StyledAuthTypography: any = styled(Typography)`
 	display: inline;
 `;
 
-const ThreadList = () => {
+const ThreadList: FC = () => {
 	const props = useSelector((state: AppState) => state);
 	return (
 		<StyledList>
@@ -51,9 +51,15 @@ const ThreadList = () => {
 };
 
 interface IfavoriteState {
+	// TODO: material-uiモジュールの型定義を明確に付与する
 	color: any;
 	checked: boolean;
 	id: string;
+}
+
+interface IfavoriteProps {
+	item: any;
+	favoriteList: any;
 }
 
 const HackerNewsList: any = (props: any) => {
@@ -121,14 +127,14 @@ const HackerNewsList: any = (props: any) => {
 							</StyledAuthTypography>
 							<StyledTypography component="span">
 								{item.score} points | {postTime}
-								<button
-									onClick={(commentUrl) => {
-										window.open().location.href = commentUrl;
+								<Button
+									onClick={(e) => {
+										window.open(commentUrl, "_blank");
 									}}
 									color="inherit"
 								>
 									{`${item.descendants} comments`}
-								</button>
+								</Button>
 							</StyledTypography>
 						</React.Fragment>
 					}
