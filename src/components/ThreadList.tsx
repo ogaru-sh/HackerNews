@@ -38,14 +38,11 @@ const ThreadList = () => {
 			{(() => {
 				return props.result.map((item: any, index: number) => {
 					return (
-						<>
-							<HackerNewsList
-								key={index}
-								item={item}
-								favoriteList={props.favoriteList}
-							/>
-							<Divider variant="inset" component="li" />
-						</>
+						<HackerNewsList
+							key={item.id}
+							item={item}
+							favoriteList={props.favoriteList}
+						/>
 					);
 				});
 			})()}
@@ -98,48 +95,54 @@ const HackerNewsList: any = (props: any) => {
 	};
 
 	return (
-		<ListItem
-			button
-			alignItems="flex-start"
-			component="a"
-			href={item.url}
-			target="_brank"
-		>
-			<ListItemAvatar>
-				<Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-			</ListItemAvatar>
-			<ListItemText
-				primary={item.title}
-				secondary={
-					<React.Fragment>
-						<StyledAuthTypography
-							component="span"
-							color="textPrimary"
-						>
-							by {item.by}
-						</StyledAuthTypography>
-						<StyledTypography>
-							{item.score} points | {postTime}
-							<Link
-								href={commentUrl}
-								color="inherit"
-								target="_brank"
-							>
-								{` | ${item.descendants} comments`}
-							</Link>
-						</StyledTypography>
-					</React.Fragment>
-				}
-			/>
-			<ListItemSecondaryAction>
-				<IconButton onClick={handleChange}>
-					<StarBorderIcon
-						fontSize="large"
-						color={favoriteState.color}
+		<>
+			<ListItem
+				button
+				alignItems="flex-start"
+				component="a"
+				href={item.url}
+				target="_brank"
+			>
+				<ListItemAvatar>
+					<Avatar
+						alt="Remy Sharp"
+						src="/static/images/avatar/1.jpg"
 					/>
-				</IconButton>
-			</ListItemSecondaryAction>
-		</ListItem>
+				</ListItemAvatar>
+				<ListItemText
+					primary={item.title}
+					secondary={
+						<React.Fragment>
+							<StyledAuthTypography
+								component="span"
+								color="textPrimary"
+							>
+								by {item.by}
+							</StyledAuthTypography>
+							<StyledTypography>
+								{item.score} points | {postTime}
+								<Link
+									href={commentUrl}
+									color="inherit"
+									target="_brank"
+								>
+									{` | ${item.descendants} comments`}
+								</Link>
+							</StyledTypography>
+						</React.Fragment>
+					}
+				/>
+				<ListItemSecondaryAction>
+					<IconButton onClick={handleChange}>
+						<StarBorderIcon
+							fontSize="large"
+							color={favoriteState.color}
+						/>
+					</IconButton>
+				</ListItemSecondaryAction>
+			</ListItem>
+			<Divider variant="inset" component="li" />
+		</>
 	);
 };
 
