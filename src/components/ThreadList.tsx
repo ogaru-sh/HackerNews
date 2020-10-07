@@ -138,10 +138,12 @@ const HackerNewsList: any = (props: any) => {
 					secondary={
 						<React.Fragment>
 							<StyledAuthTypography component="span">
-								by {item.by}
+								{item.by ? `by ${item.by}` : "no author"}
 							</StyledAuthTypography>
 							<StyledTypography component="span">
-								{item.score} points
+								{item.score
+									? `${item.score} points`
+									: "0 points"}
 							</StyledTypography>
 							<StyledTypography component="span">
 								{postTime}
@@ -152,7 +154,9 @@ const HackerNewsList: any = (props: any) => {
 								}}
 								color="inherit"
 							>
-								{`${item.descendants} comments`}
+								{item.descendants
+									? `${item.descendants} comments`
+									: "0 comments"}
 							</StyledButton>
 						</React.Fragment>
 					}
