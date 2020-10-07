@@ -1,6 +1,5 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import List, { ListProps } from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Divider from "@material-ui/core/Divider";
@@ -8,7 +7,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Avatar from "@material-ui/core/Avatar";
-import Typography, { TypographyProps } from "@material-ui/core/Typography";
+import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import Button from "@material-ui/core/Button";
@@ -18,9 +17,20 @@ import actions from "../ts/action";
 import moment from "moment";
 
 const StyledList = styled(List)`
-	width: 100%;
+	width: 70%;
 	padding-top: 10px;
+	left: 15%;
+	background: rgba(255, 255, 255, 0.9);
+	border: 1px solid #cccccc;
+	border-radius: 7px;
+	box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+	margin-top: 20px;
 ` as React.ComponentType<ListProps>;
+
+const StyledListItem: any = styled(ListItem)`
+	padding-left: 30px;
+	padding-bottom: 0px;
+`;
 
 //TODO: 型をつける
 const StyledTypography: any = styled(Typography)`
@@ -29,6 +39,17 @@ const StyledTypography: any = styled(Typography)`
 
 const StyledAuthTypography: any = styled(Typography)`
 	display: inline;
+	color: gray;
+`;
+
+const StyledButton: any = styled(Button)`
+	bottom: 1px;
+	color: #0002ff82; ;
+`;
+
+const StyledDivider: any = styled(Divider)`
+	width: 90%;
+	margin-left: 35px;
 `;
 
 const ThreadList: FC = () => {
@@ -55,11 +76,6 @@ interface IfavoriteState {
 	color: any;
 	checked: boolean;
 	id: string;
-}
-
-interface IfavoriteProps {
-	item: any;
-	favoriteList: any;
 }
 
 const HackerNewsList: any = (props: any) => {
@@ -102,19 +118,13 @@ const HackerNewsList: any = (props: any) => {
 
 	return (
 		<>
-			<ListItem
+			<StyledListItem
 				button
 				alignItems="flex-start"
 				component="a"
 				href={item.url}
 				target="_brank"
 			>
-				<ListItemAvatar>
-					<Avatar
-						alt="Remy Sharp"
-						src="/static/images/avatar/1.jpg"
-					/>
-				</ListItemAvatar>
 				<ListItemText
 					primary={item.title}
 					secondary={
@@ -126,16 +136,19 @@ const HackerNewsList: any = (props: any) => {
 								by {item.by}
 							</StyledAuthTypography>
 							<StyledTypography component="span">
-								{item.score} points | {postTime}
-								<Button
-									onClick={(e) => {
-										window.open(commentUrl, "_blank");
-									}}
-									color="inherit"
-								>
-									{`${item.descendants} comments`}
-								</Button>
+								{item.score} points
 							</StyledTypography>
+							<StyledTypography component="span">
+								{postTime}
+							</StyledTypography>
+							<StyledButton
+								onClick={(e) => {
+									window.open(commentUrl, "_blank");
+								}}
+								color="inherit"
+							>
+								{`${item.descendants} comments`}
+							</StyledButton>
 						</React.Fragment>
 					}
 				/>
@@ -147,8 +160,8 @@ const HackerNewsList: any = (props: any) => {
 						/>
 					</IconButton>
 				</ListItemSecondaryAction>
-			</ListItem>
-			<Divider variant="inset" component="li" />
+			</StyledListItem>
+			<StyledDivider variant="inset" component="li" />
 		</>
 	);
 };
