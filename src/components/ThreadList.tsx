@@ -4,9 +4,7 @@ import List, { ListProps } from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Divider from "@material-ui/core/Divider";
 import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
@@ -33,23 +31,29 @@ const StyledListItem: any = styled(ListItem)`
 `;
 
 //TODO: 型をつける
+const StyledTitleTypography = styled(Typography)`
+	font-size: 18px;
+`;
 const StyledTypography: any = styled(Typography)`
-	padding-left: 10px;
+	padding-left: 14px;
+	font-size: 14px;
 `;
 
 const StyledAuthTypography: any = styled(Typography)`
 	display: inline;
-	color: gray;
+	font-size: 14px;
 `;
 
 const StyledButton: any = styled(Button)`
 	bottom: 1px;
-	color: #0002ff82; ;
+	color: #0004ff69;
+	font-size: 14px;
+	padding-left: 17px;
 `;
 
 const StyledDivider: any = styled(Divider)`
-	width: 90%;
-	margin-left: 35px;
+	width: auto;
+	margin-left: 0px;
 `;
 
 const ThreadList: FC = () => {
@@ -126,13 +130,14 @@ const HackerNewsList: any = (props: any) => {
 				target="_brank"
 			>
 				<ListItemText
-					primary={item.title}
+					primary={
+						<StyledTitleTypography>
+							{item.title}
+						</StyledTitleTypography>
+					}
 					secondary={
 						<React.Fragment>
-							<StyledAuthTypography
-								component="span"
-								color="textPrimary"
-							>
+							<StyledAuthTypography component="span">
 								by {item.by}
 							</StyledAuthTypography>
 							<StyledTypography component="span">
