@@ -35,7 +35,7 @@ const StyledTitleTypography = styled(Typography)`
 	font-size: 18px;
 `;
 const StyledTypography: any = styled(Typography)`
-	padding-left: 14px;
+	padding-left: 12px;
 	font-size: 14px;
 `;
 
@@ -48,7 +48,7 @@ const StyledButton: any = styled(Button)`
 	bottom: 1px;
 	color: #0004ff69;
 	font-size: 14px;
-	padding-left: 17px;
+	margin-left: 6px;
 `;
 
 const StyledDivider: any = styled(Divider)`
