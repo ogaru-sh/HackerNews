@@ -14,7 +14,7 @@ export const initialState: DefaultState = {
 	pureResult: [],
 	searchResult: [],
 	favoriteList: [],
-	tabName: "",
+	tabName: "new",
 	error: {},
 };
 
@@ -26,6 +26,7 @@ export const reducer = (state = initialState, action: Actions) => {
 				pureResult: action.payload.pureResult,
 				searchResult: action.payload.searchResult,
 				favoriteList: action.payload.favoriteList,
+				tabName: action.payload.tabName
 			});
 		case ActionTypes.CLICK_FAVORITE_BUTTON:
 			return Object.assign({}, state, {
