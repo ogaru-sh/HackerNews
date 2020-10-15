@@ -4,7 +4,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
-import actions from "../../ts/action";
+import actions from "../ts/action";
 import moment from "moment";
 
 import {
@@ -15,10 +15,10 @@ import {
 	StyledAuthTypography,
 	StyledButton,
 	StyledDivider,
-} from "./style";
+} from "../styles/threadList";
 
-import { AppState } from "../../ts/state";
-import { ColorType } from "../../ts/interface";
+import { AppState } from "../ts/state";
+import { ColorType } from "../ts/interface";
 
 const ThreadList: FC = () => {
 	const props = useSelector((state: AppState) => state);
