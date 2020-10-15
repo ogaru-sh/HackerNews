@@ -10,9 +10,11 @@ import IconButton from "@material-ui/core/IconButton";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import Button from "@material-ui/core/Button";
 import styled from "styled-components";
-import { AppState } from "../ts/state";
 import actions from "../ts/action";
 import moment from "moment";
+
+import { AppState } from "../ts/state";
+import { ColorType } from "../ts/interface";
 
 const StyledList = styled(List)`
 	width: 70%;
@@ -93,7 +95,7 @@ const HackerNewsList: any = (props: any) => {
 		id: "",
 	});
 
-	favoriteState.color = isFavorite ? "secondary" : "primary";
+	favoriteState.color = isFavorite ? ColorType.Sec : ColorType.Pri;
 	favoriteState.checked = isFavorite;
 	favoriteState.id = item.id;
 

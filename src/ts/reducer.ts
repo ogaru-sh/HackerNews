@@ -1,22 +1,5 @@
 import { Actions, ActionTypes } from "./action";
-
-export interface DefaultState {
-	result: any;
-	pureResult: any;
-	searchResult: any;
-	favoriteList: string[];
-	tabName: string;
-	error: any;
-}
-
-export const initialState: DefaultState = {
-	result: [],
-	pureResult: [],
-	searchResult: [],
-	favoriteList: [],
-	tabName: "new",
-	error: {},
-};
+import { initialState } from "./state";
 
 export const reducer = (state = initialState, action: Actions) => {
 	switch (action.type) {
@@ -26,7 +9,7 @@ export const reducer = (state = initialState, action: Actions) => {
 				pureResult: action.payload.pureResult,
 				searchResult: action.payload.searchResult,
 				favoriteList: action.payload.favoriteList,
-				tabName: action.payload.tabName
+				tabName: action.payload.tabName,
 			});
 		case ActionTypes.CLICK_FAVORITE_BUTTON:
 			return Object.assign({}, state, {

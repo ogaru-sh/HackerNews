@@ -1,17 +1,7 @@
 import { Action, Dispatch } from "redux";
 import fetchAPI from "./api/fetchAPI";
 import config from "./config";
-
-export interface ActionBase extends Action {
-	type: ActionTypes.INIT_HACKERNEWS;
-	payload: {
-		result: object[];
-		pureResult: object[];
-		searchResult: object[];
-		favoriteList: string[];
-		tabName: string;
-	};
-}
+import { ActionBase } from "./interface";
 
 interface ClickFavoriteButton extends Action {
 	type: ActionTypes.CLICK_FAVORITE_BUTTON;
@@ -40,27 +30,31 @@ const init = (apiType: string) => {
 	return async (dispatch: Dispatch<ActionTypes>, getState: any) => {
 		let fetchItems;
 		const favoriteList = getState().favoriteList;
-		if (apiType === "favorite") {
-			fetchItems = favoriteList;
-		} else {
-			fetchItems = await fetchAPI.fetchAPI(config.apiType[apiType]);
+		try {
+			if (apiType === "favorite") {
+				fetchItems = favoriteList;
+			} else {
+				fetchItems = await fetchAPI.fetchAPI(config.apiType[apiType]);
+			}
+			const limitItems = fetchItems.slice(0, config.viewLimit);
+			const itemDetailArr = [];
+			for (const item of limitItems) {
+				const itemDetail = await fetchAPI.fetchAPI(`item/${item}`);
+				itemDetailArr.push(itemDetail);
+			}
+			dispatch({
+				type: ActionTypes.INIT_HACKERNEWS,
+				payload: {
+					result: itemDetailArr,
+					pureResult: fetchItems,
+					searchResult: itemDetailArr,
+					tabName: apiType,
+					favoriteList: favoriteList,
+				},
+			});
+		} catch {
+			// TODO: error action
 		}
-		const limitItems = fetchItems.slice(0, config.viewLimit);
-		const itemDetailArr = [];
-		for (const item of limitItems) {
-			const itemDetail = await fetchAPI.fetchAPI(`item/${item}`);
-			itemDetailArr.push(itemDetail);
-		}
-		dispatch({
-			type: ActionTypes.INIT_HACKERNEWS,
-			payload: {
-				result: itemDetailArr,
-				pureResult: fetchItems,
-				searchResult: itemDetailArr,
-				tabName: apiType,
-				favoriteList: favoriteList,
-			},
-		});
 	};
 };
 
