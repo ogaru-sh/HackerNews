@@ -1,6 +1,6 @@
 # HackerNews
 [HackerNewsAPI](https://github.com/HackerNews/API)から取得した
-記事情報をもとに、React・Reduxを用いたサンプルWebサイトを作成
+記事情報をもとに、React・Reduxを用いた記事閲覧サイトを作成
 
 ## Dependency
 - Front
@@ -13,8 +13,14 @@
     - material-ui 4.11.0
 
 ## Setup
-`git clone  https://github.com/ogaru-sh/HackerNews`
+`git clone https://github.com/ogaru-sh/HackerNews`
 `npm install`
+`npm run build`
+`npm run start`
+`http://localhost:3000/`へアクセス
+
+### Develop mode
+`npm run dev`
 
 ## Demo
 `https://hackernews-d1967.firebaseapp.com/`
@@ -25,6 +31,6 @@
     - POPULAR: 最も読まれている記事
     - JOB: ITやマーケティングなど仕事に関する記事
     - FAVORITE: お気に入り機能
-        - 各タブでスターをクリックするとお気に入りとしてFAVORITEへ登録、または解除
+        - 各記事のスターをクリックするとお気に入りとしてFAVORITEへ登録、または解除
 - 検索機能
     - 各タブでインクリメンタルサーチが可能
