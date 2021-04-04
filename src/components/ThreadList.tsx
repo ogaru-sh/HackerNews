@@ -18,14 +18,14 @@ import {
 } from "../styles/threadList";
 
 import { AppState } from "../ts/state";
-import { ColorType } from "../ts/interface";
+import { ColorType, ApiResult, DefaultState } from "../ts/interface";
 
 const ThreadList: FC = () => {
 	const props = useSelector((state: AppState) => state);
 	return (
 		<StyledList>
 			{(() => {
-				return props.result.map((item: any, index: number) => {
+				return props.result.map((item: ApiResult, index: number) => {
 					return (
 						<HackerNewsList
 							key={item.id}
@@ -46,7 +46,7 @@ interface IfavoriteState {
 	id: string;
 }
 
-const HackerNewsList: any = (props: any) => {
+const HackerNewsList = (props: {item: ApiResult, favoriteList: DefaultState["favoriteList"] }) => {
 	const dispatch = useDispatch();
 	const { item, favoriteList } = props;
 	const isFavorite = favoriteList.indexOf(item.id) !== -1 ? true : false;

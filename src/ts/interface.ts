@@ -19,29 +19,30 @@ export interface ActionBase extends Action {
 }
 
 export interface DefaultState {
-	result: [
-		{
-			deleted: boolean;
-			type: string;
-			by: string;
-			time: number;
-			text: string;
-			dead: boolean;
-			parent: number[];
-			poll: number;
-			kids: number[];
-			url: string;
-			score: number;
-			title: string;
-			parts: number[];
-			descendants: number;
-		}
-	];
-	pureResult: any;
-	searchResult: any;
+	result: ApiResult[] 
+	pureResult: object[];
+	searchResult: object[];
 	favoriteList: string[];
 	tabName: string;
 	error: any;
+}
+
+export interface ApiResult 	{
+	deleted: boolean;
+	type: string;
+	by: string;
+	time: number;
+	text: string;
+	dead: boolean;
+	parent: number[];
+	poll: number;
+	kids: number[];
+	url: string;
+	score: number;
+	title: string;
+	parts: number[];
+	descendants: number;
+	id: string
 }
 
 export enum ColorType {

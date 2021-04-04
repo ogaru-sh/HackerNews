@@ -19,6 +19,7 @@ export const initialState: DefaultState = {
 			title: "",
 			parts: [],
 			descendants: 0,
+			id: ""
 		},
 	],
 	pureResult: [],
