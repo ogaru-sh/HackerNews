@@ -13,10 +13,10 @@
     - material-ui 4.11.0
 
 ## Setup
-`git clone https://github.com/ogaru-sh/HackerNews`
-`npm install`
-`npm run build`
-`npm run start`
+`git clone https://github.com/ogaru-sh/HackerNews`  
+`npm install`  
+`npm run build`  
+`npm run start`  
 `http://localhost:3000/`へアクセス
 
 ### Develop mode
