@@ -25,7 +25,7 @@ const ThreadList: FC = () => {
 	return (
 		<StyledList>
 			{(() => {
-				return props.result.map((item: ApiResult, index: number) => {
+				return props.result.map((item: ApiResult, _index: number) => {
 					return (
 						<HackerNewsList
 							key={item.id}
