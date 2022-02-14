@@ -1,30 +1,30 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { Provider } from "react-redux";
 import CenteredTabs from "../../components/header/Tabs";
 import { renderMUI } from "../support/renderMUI";
-import { useStore, initStore, initializeStore } from "../../ts/store";
-import { reducer } from "../../ts/reducer";
-import { createStore } from "redux";
+import { useStore } from "../../ts/store";
+import configureStore from "redux-mock-store";
 
 import { renderHook, act } from "@testing-library/react-hooks";
 
 const initialState = {
-	result: [],
-	pureResult: [],
-	searchResult: [],
-	favoriteList: [],
-	tabName: "new",
-	error: {},
+  result: [],
+  pureResult: [],
+  searchResult: [],
+  favoriteList: [],
+  tabName: "new",
+  error: {}
 };
 
+const mockStore = configureStore();
+
 describe("Tab", () => {
-	test("renders Tab component", () => {
-		const store = renderHook(() => useStore(initialState));
-		renderMUI(
-			// TODO: オーバーロードエラーを回避する
-			<Provider store={store}>
-				<CenteredTabs />
-			</Provider>
-		);
-	});
+  test("renders Tab component", () => {
+    const store = renderHook(() => useStore(initialState));
+    renderMUI(
+      <Provider store={mockStore(initialState)}>
+        <CenteredTabs />
+      </Provider>
+    );
+  });
 });
